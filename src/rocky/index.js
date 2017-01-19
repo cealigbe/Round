@@ -65,11 +65,11 @@ rocky.on('draw', function(event) {
 	var showDate = true;
 	
 	if (settings) {
-		bgColor = settings.bgColor;
-		cirColor = settings.cirColor;
-		hourColor = settings.hourColor;
-		minColor = settings.minColor;
-		dateColor = settings.dateColor;
+		bgColor = cssColor(settings.bgColor);
+		cirColor = cssColor(settings.cirColor);
+		hourColor = cssColor(settings.hourColor);
+		minColor = cssColor(settings.minColor);
+		dateColor = cssColor(settings.dateColor);
 		showDate = settings.date;
 	}
 	
@@ -112,3 +112,35 @@ rocky.on('minutechange', function(event) {
 });
 
 rocky.postMessage({command: 'settings'});
+
+// Borrowed from Clay.js
+
+/**
+ * @param {string|boolean|number} color
+ * @returns {string}
+ */
+function cssColor(color) {
+	if (typeof color === 'number') {
+		color = color.toString(16);
+	} else if (!color) {
+		return 'transparent';
+	}
+
+	color = padColorString(color);
+
+	return '#' + color;
+}
+
+/**
+ * @param {string} color
+ * @return {string}
+ */
+function padColorString(color) {
+	color = color.toLowerCase();
+
+	while (color.length < 6) {
+		color = '0' + color;
+	}
+
+	return color;
+}
