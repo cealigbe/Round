@@ -4,6 +4,9 @@
     "keywords": [],
     "name": "round",
     "pebble": {
+        "capabilities": [
+            "configurable"
+        ],
         "displayName": "Round",
         "enableMultiJS": true,
         "messageKeys": [],
